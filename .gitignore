@@ -1,0 +1,6 @@
+.idea/
+allure-results/
+.allure/
+
+# Project exclude paths
+/target/
