@@ -2,7 +2,7 @@ package common;
 
 public class Server {
 
-    private static final String SERVER = "http://esz-test.mos.ru/Security/Login";
+    private static final String SERVER = "https://docs.yandex.ru/";
 
     public static String getServerURL() {
         return SERVER;
