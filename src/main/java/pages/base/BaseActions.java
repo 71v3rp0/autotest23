@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.function.Function;
 
 
@@ -138,6 +139,12 @@ public class BaseActions {
     protected void click(String selector) {
         By by = stringToBy(selector);
         driver.findElement(by).click();
+    }
+
+    @Step("Переключение на последнюю открытую вкладку")
+    protected void switchToLastTab() {
+        ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(tabs.size() - 1));
     }
 
     /**

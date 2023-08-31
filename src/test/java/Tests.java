@@ -14,7 +14,9 @@ import org.openqa.selenium.devtools.v101.page.Page;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
+import pages.CreateDocPage.CreateDocPage;
 import pages.login.LoginPage;
+import pages.main.MainPage;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
@@ -30,13 +32,20 @@ public class Tests extends BaseTest {
     public void test() {
 
             LoginPage loginPage = new LoginPage(driver);
-            UserModel user = new UserModel("**", "**", "student");
+            UserModel user = new UserModel("a.dorofeev01", "alexI_28112001leha", "student");
             loginPage.open();
             loginPage.mail();
             loginPage.checkLoginLogin();
             loginPage.loginFirst(user);
             loginPage.checkLoginPass();
             loginPage.loginSecond(user);
+
+            CreateDocPage createDocPage = new CreateDocPage(driver);
+            createDocPage.createDoc("doc1");
+
+            MainPage mainPage = new MainPage(driver);
+            mainPage.checkElements();
+            mainPage.mainTask();
 
              //  driver.get("https://docs.yandex.ru/docs");
             /*
