@@ -47,28 +47,6 @@ public class Tests extends BaseTest {
             mainPage.checkElements();
             mainPage.mainTask();
 
-             //  driver.get("https://docs.yandex.ru/docs");
-            /*
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(1));
 
-            WebElement element = driver.findElement(By.xpath("//button[@data-type='login']")); //нажатие почта
-            element.click();
-
-            element = driver.findElement(By.xpath("//input[@id='passp-field-login']")); //ввод логин энтер
-            element.sendKeys("**", Keys.ENTER);
-
-            driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500)); //ждем 1 сек неявное ожидание
-            //element = driver.findElement((By) new WebDriverWait(driver, Duration.ofSeconds(1)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@id='passp-field-passwd'")))); //ждем появления элемента и ввод пароль энтер
-            element = driver.findElement(By.xpath("//input[@id='passp-field-passwd']")); //ввод пароль энтер
-
-            element.sendKeys("**", Keys.ENTER);
-
-            element = driver.findElement(By.xpath("//button[@class ='Docs-Stub__Option']//span[@class ='Docs-Stub__Option-Icon Docs-Stub__Option-Icon_docx']")); //нажатие документы нч
-            element.click();
-
-            element = driver.findElement(By.xpath("//input[@class ='Textinput-Control']")); //name new doc
-            element.sendKeys("new doc 1", Keys.ENTER);
-
-             */
     }
 }

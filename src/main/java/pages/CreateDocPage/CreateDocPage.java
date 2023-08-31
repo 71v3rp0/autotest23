@@ -33,7 +33,7 @@ public class CreateDocPage extends BasePage {
         click(createDocBtn2);
         waitElementVisible(docNameField);
         WebElement element = driver.findElement(By.xpath(docNameField)); //очищения поля ввода хз так или не так над(
-        element.sendKeys("", Keys.BACK_SPACE);
+        element.sendKeys(Keys.BACK_SPACE);
         element.sendKeys(docName);
         waitElementVisible(createDocBtn3);
         click(createDocBtn3);
