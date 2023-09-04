@@ -14,6 +14,8 @@ public class CreateDocPage extends BasePage {
     private final String createDocBtn2 = "//div[@class='Menu-Item Menu-Item_type_menuitem Docs-Create-Dropdown__Type Docs-Create-Dropdown__Type_docx']";
     private final String createDocBtn3 = "//button[@class='Button2 Button2_view_action Button2_size_m confirmation-dialog__button confirmation-dialog__button_submit ']";
     private final String docNameField = "//input[@text='Новый документ']";
+    private final String docNameTextFocused = "//span[contains(@class,'Textinput_focused')]";
+    private final String docNameFieldEmpty = "//input[@text='']";
 
     public CreateDocPage(WebDriver driver) {
         super(driver);
@@ -25,15 +27,21 @@ public class CreateDocPage extends BasePage {
         return this;
     }
 
-    @Step(value = "Создание дока")
-    public CreateDocPage createDoc(String docName) {
+    @Step (value = "1) - Создание док-а - нажатие на кнопку 'Создать документ' на главной странице")
+    public CreateDocPage clickCreateDoc(){
         waitElementVisible(createDocBtn);
         click(createDocBtn);
         waitElementVisible(createDocBtn2);
         click(createDocBtn2);
+        return this;
+    }
+    @Step(value = "1) - Создание дока - задание имени и нажатие на кнопку создать")
+    public CreateDocPage createDoc(String docName) {
         waitElementVisible(docNameField);
-        WebElement element = driver.findElement(By.xpath(docNameField)); //очищения поля ввода хз так или не так над(
-        element.sendKeys(Keys.BACK_SPACE);
+        WebElement element = driver.findElement(By.xpath(docNameField)); //очищения поля ввода названия док-а
+        waitElementVisible(docNameTextFocused); //ожидание момента, когда текст названия (изначальный) документа станет выделенным
+        element.sendKeys(Keys.DELETE);
+        waitElementVisible(docNameFieldEmpty); //ожидание пустого поля ввода назв. док.
         element.sendKeys(docName);
         waitElementVisible(createDocBtn3);
         click(createDocBtn3);

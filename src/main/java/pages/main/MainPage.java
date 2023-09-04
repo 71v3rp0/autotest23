@@ -22,7 +22,6 @@ public class MainPage extends BasePage {
     private final String fontTypeBold = "//button[@id='id-toolbar-btn-bold']";
     private final String fontTypeItalic = "//span[@id='slot-btn-italic']//button[contains(@class, 'btn')]"; //наклонный
     private final String fontTypeStrikeout = "//button[@id='id-toolbar-btn-strikeout']//i[contains(@class,'icon')]"; //перечеркнутый
-    private final String mainField = "//canvas[@id='id_viewer_overlay']";
     private final String fontSizeField = "//span[@id='asc-gen436']//input[@class='form-control']";
     private final String leftAlign = "//button[@id='id-toolbar-btn-align-left']";
     private final String rightAlign = "//button[@id='id-toolbar-btn-align-right']";
@@ -42,21 +41,24 @@ public class MainPage extends BasePage {
         driver.get(Server.getServerURL());
         return this;
     }
-
-    @Step(value = "Проверка главной страницы")
-    public MainPage checkElements() {
+    @Step (value = "проверка загрузки страницы ред-ия док-а")
+    public MainPage checkMainPage()
+    {
         switchToLastTab();
         waitElementVisible(workIFrame);
         WebElement iframeAppPanel = driver.findElement(By.xpath(workIFrame));
         driver.switchTo().frame(iframeAppPanel);
-        waitElementVisible(mainWorkspace);                            //не находит(   //iframe[contains(@src,'frameEditorId')]
+        waitElementVisible(mainWorkspace);
+        return this;
+    }
+    @Step(value = "Проверка наличия необходимых элементов панели 'главная'")
+    public MainPage checkElementsMain() {
         waitElementVisible(fontTypeBtn);
         waitElementVisible(fontSizeBtn);
         waitElementVisible(fontTypeBold);
         waitElementVisible(fontTypeItalic);
         waitElementVisible(fontTypeStrikeout);
         waitElementVisible(fontSizeField);
-        waitElementVisible(mainField);
         waitElementVisible(leftAlign);
         waitElementVisible(rightAlign);
         waitElementVisible(justAlign);
@@ -64,34 +66,55 @@ public class MainPage extends BasePage {
         return this;
     }
 
-    @Step(value = "Действия")
-    public MainPage mainTask(){
+    
+
+    @Step(value = "выбрать шрифт ариал 12 жирный ввести текст 'ариал 12 жирный'")
+    public MainPage secondStep(){ //
         click(fontTypeBtn);
         waitElementVisible(fontTypeAsana);
         click(fontTypeAsana);
         click(fontSizeBtn);
         fillField(fontSizeField, "12");
         new Actions(driver).moveByOffset(800, 400).click().sendKeys("Asana12").build().perform();
-
+        return this;
+    }
+    @Step(value = "выбрать шрифт ариал 13 наклонный ввести текст  'ариал 13 наклонный'")
+    public MainPage thirdStep() { //
         click(fontSizeBtn);
         fillField(fontSizeField, "13");
         click(fontTypeItalic);
         new Actions(driver).sendKeys("Асана13 bold").build().perform();
-
+        return this;
+    }
+    @Step(value = "выбрать шрифт ариал 14 зачеркнутый ввести текст  'ариал 14 зачеркнутый'")
+    public MainPage fourthStep() { //
         click(fontSizeBtn);
         fillField(fontSizeField, "14");
         click(fontTypeItalic);
         click(fontTypeStrikeout);
         new Actions(driver).sendKeys("Asana14 strikeout").build().perform();
+        return this;
+    }
+    @Step(value = "ввести несколько колонок текста")
+    public MainPage fifthStep() { //
         click(fontTypeStrikeout);
         new Actions(driver).sendKeys(" Sakura is the Japanese term for cherry blossom trees. Cherry blossom trees are different from other cherry trees. The main difference is that cherry blossom trees don’t produce fruit. Instead, they bloom with beautiful pink or white flowers each spring. Unfortunately, the trees only flower for a week or two." + "\n" +
                 "Cherry blossom trees are an icon of Japan. Some people even call the cherry blossom Japan’s informal national flower. The Japanese school year starts in April, during cherry blossom season. The flowers symbolize good luck, love, and springtime. Since they bloom for such a short time, cherry blossom trees also represent human mortality. They remind us how short and precious life is.").build().perform();
+
+        return this;
+    }
+    @Step(value = "выравнивание текста")
+    public MainPage sixthSeventhEighthStep(){
         new Actions(driver).keyDown(Keys.SHIFT).sendKeys(Keys.HOME, Keys.PAGE_UP).build().perform();
-
-        click(rightAlign);
-        click(leftAlign);
-        click(justAlign);
-
+        click(rightAlign);                              //6) сделать выравнивание текста по левому краю
+        click(leftAlign);                               //7) сделать выравнивание текста по правому краю
+        click(justAlign);                                //8) сделать выравнивание текста по ширине
+        return this;
+    }
+    @Step(value = "Создайте таблицу с не менее чем 5 строками и столбцами в документе")
+    public MainPage ninthStep() { //
+        click(mainWorkspace);
+        click(mainWorkspace);
         click(insert);
         click(tableInsert);
         waitElementVisible(tableCustom);
@@ -99,7 +122,7 @@ public class MainPage extends BasePage {
         waitElementVisible(tableRowCount);
         waitElementVisible(tableColumnCount);
 
-        WebElement element = driver.findElement(By.xpath(tableRowCount)); //очищения поля ввода хз так или не так над(
+        WebElement element = driver.findElement(By.xpath(tableRowCount)); //заполнение полей ввода количества строк столбцов
         element.sendKeys(Keys.BACK_SPACE);
         element.sendKeys("5");
         element = driver.findElement(By.xpath(tableColumnCount));
@@ -108,6 +131,4 @@ public class MainPage extends BasePage {
         new Actions(driver).sendKeys(Keys.ENTER).build().perform();
         return this;
     }
-
-
 }

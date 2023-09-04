@@ -32,14 +32,6 @@ public class LoginPage extends BasePage {
         return this;
     }
 
-    @Step(value = "Проверка элементов страницы авторизации")
-    public LoginPage checkElements() {
-        waitElementVisible(lgnFld);
-        waitElementVisible(pwdFld);
-        waitElementVisible(btnLogin);
-        return this;
-    }
-
     @Step(value = "Проверка появления поля ввода логина и кнопки логина")
     public LoginPage checkLoginLogin() {
         waitElementVisible(btnLogin);
@@ -73,11 +65,5 @@ public class LoginPage extends BasePage {
         click(btnLogin);
         return new MainPage(driver);
     }
-    @Step(value = "Авторизация")
-    public MainPage login(UserModel user) {
-        fillField(lgnFld, user.username);
-        fillField(pwdFld, user.password);
-        click(btnLogin);
-        return new MainPage(driver);
-    }
+
 }

@@ -32,7 +32,7 @@ public class Tests extends BaseTest {
     public void test() {
 
             LoginPage loginPage = new LoginPage(driver);
-            UserModel user = new UserModel("a.dorofeev01", "alexI_28112001leha", "student");
+            UserModel user = new UserModel("**", "**", "student");
             loginPage.open();
             loginPage.mail();
             loginPage.checkLoginLogin();
@@ -41,11 +41,18 @@ public class Tests extends BaseTest {
             loginPage.loginSecond(user);
 
             CreateDocPage createDocPage = new CreateDocPage(driver);
+            createDocPage.clickCreateDoc();
             createDocPage.createDoc("doc1");
 
             MainPage mainPage = new MainPage(driver);
-            mainPage.checkElements();
-            mainPage.mainTask();
+            mainPage.checkMainPage();
+            mainPage.checkElementsMain();
+            mainPage.secondStep();
+            mainPage.thirdStep();
+            mainPage.fourthStep();
+            mainPage.fifthStep();
+            mainPage.sixthSeventhEighthStep();
+            mainPage.ninthStep();
 
 
     }
