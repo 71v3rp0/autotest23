@@ -60,8 +60,8 @@ public class DocEditorPage extends BasePage {
         waitElementVisible(fontTypeBoldBtn);                                                      //проверка наличия кнопки
         if (!booleanWaitElementVisible(fontTypeBoldBtn + btnIsActive, 0)) {     //проверка нажата кнопка или нет
             click(fontTypeBoldBtn);                                                              //если кнопка не нажата - нажимаем, если уже нажата - ничего не делаем
-            waitElementVisible(fontTypeBoldBtn + btnIsActive);                            //проверяем, нажалась ли по итогу кнопка
         }
+        waitElementVisible(fontTypeBoldBtn + btnIsActive);                            //проверяем, нажалась ли по итогу кнопка
            return this;
     }
 
@@ -70,8 +70,8 @@ public class DocEditorPage extends BasePage {
         waitElementVisible(fontTypeItalicBtn);
         if (!booleanWaitElementVisible(fontTypeItalicBtn + btnIsActive, 0)) {
             click(fontTypeItalicBtn);
-            waitElementVisible(fontTypeItalicBtn + btnIsActive);
         }
+        waitElementVisible(fontTypeItalicBtn + btnIsActive);
         return this;
     }
     @Step(value = "Выбор типа шрифта - перечеркнутый")
@@ -79,8 +79,8 @@ public class DocEditorPage extends BasePage {
         waitElementVisible(fontTypeStrikeoutBtn);
         if (!booleanWaitElementVisible(fontTypeStrikeoutBtn + btnIsActive, 0)) {
             click(fontTypeStrikeoutBtn);
-            waitElementVisible(fontTypeStrikeoutBtn + btnIsActive);
         }
+        waitElementVisible(fontTypeStrikeoutBtn + btnIsActive);
         return this;
     }
     @Step(value = "Выбор типа шрифта - нежирный")
