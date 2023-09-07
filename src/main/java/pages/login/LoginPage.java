@@ -4,66 +4,49 @@ import common.Server;
 import io.qameta.allure.Step;
 import models.UserModel;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 import pages.base.BasePage;
-import pages.main.MainPage;
-
-
-import java.awt.*;
-
 public class LoginPage extends BasePage {
-
     public static final String URL = "docs";
-
     private final String mail = "//button[@data-type='login']"; //
-
-    private final String lgnFld = "//input[@id='passp-field-login']";
-
-    private final String pwdFld = "//input[@id='passp-field-passwd']";
-    private final String btnLogin = "//button[@id='passp:sign-in']";
-
-
+    private final String loginField = "//input[@id='passp-field-login']";
+    private final String pwdField = "//input[@id='passp-field-passwd']";
+    private final String loginBtn = "//button[@id='passp:sign-in']";
+    private final String btnIsChecked = "/../*[contains(@class,'checked')]";
+    private final String createBtn = "//button[contains(@class,'Docs-Create-Dropdown__Button')]";
     public LoginPage(WebDriver driver) {
         super(driver);
     }
-
     @Override
     public LoginPage open() {
         driver.get(Server.getServerURL() + URL);
         return this;
     }
-
-    @Step(value = "Проверка появления поля ввода логина и кнопки логина")
-    public LoginPage checkLoginLogin() {
-        waitElementVisible(btnLogin);
-        waitElementVisible(lgnFld);
-        return this;
-    }
-
-    @Step(value = "Проверка появления поля ввода пароля")
-    public LoginPage checkLoginPass() {
-        waitElementVisible(pwdFld);
-        return this;
-    }
-
-    @Step(value = "Проверка появления кнопки почта и ее нажать)")
-    public LoginPage mail() {
+    @Step(value = "Переход на метод ввода - почта")
+    public LoginPage loginWithMail() {
         waitElementVisible(mail);
         click(mail);
+        waitElementVisible(mail + btnIsChecked);
+        return this;
+    }
+    @Step(value = "Заполнение авторизационной формы - логин")
+    public LoginPage loginEnterLogin(UserModel user) {
+        waitElementVisible(loginBtn);
+        waitElementVisible(loginField);
+        fillField(loginField, user.username);
+        click(loginBtn);
+        waitElementVisible(pwdField);
         return this;
     }
 
-    @Step(value = "Авторизация первая страница")
-    public MainPage loginFirst(UserModel user) {
-        fillField(lgnFld, user.username);
-        click(btnLogin);
-        return new MainPage(driver);
-    }
-
-    @Step(value = "Авторизация вторая страница")
-    public MainPage loginSecond(UserModel user) {
-        fillField(pwdFld, user.password);
-        click(btnLogin);
-        return new MainPage(driver);
+    @Step(value = "Заполнение авторизационной формы - пароль")
+    public LoginPage loginEnterPassword(UserModel user) {
+        waitElementVisible(loginBtn);
+        waitElementVisible(pwdField);
+        fillField(pwdField, user.password);
+        click(loginBtn);
+        waitElementVisible(createBtn);
+        return this;
     }
 
 }

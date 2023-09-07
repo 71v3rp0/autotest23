@@ -72,6 +72,18 @@ public class BaseActions {
 
     }
 
+    @Step(value = "Ожидание элемента булеан {0}")
+    protected boolean booleanWaitElementVisible(String selector, long timeoutMillis) {
+        By by = stringToBy(selector);
+        try {
+            new WebDriverWait(driver, Duration.ofSeconds(timeoutMillis))
+                    .until(ExpectedConditions.visibilityOfElementLocated(by));
+            return true;
+        } catch (TimeoutException timeoutEx) {
+            return false;
+        }
+    }
+
     @Step(value = "Ожидание элемента {0}")
     protected void waitElementVisible(String selector, long timeOut) {
         By by = stringToBy(selector);
